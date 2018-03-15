@@ -14,6 +14,7 @@
 		FC25C02E205AD6BC00A26CFB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25C02D205AD6BC00A26CFB /* ViewController.swift */; };
 		FC25C030205AD6BC00A26CFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC25C02F205AD6BC00A26CFB /* Assets.xcassets */; };
 		FC25C033205AD6BD00A26CFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC25C031205AD6BD00A26CFB /* Main.storyboard */; };
+		FC25C03C205AD90C00A26CFB /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25C03B205AD90C00A26CFB /* StartScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		FC25C032205AD6BD00A26CFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC25C034205AD6BD00A26CFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC25C035205AD6BD00A26CFB /* Create_Task_v3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Create_Task_v3.entitlements; sourceTree = "<group>"; };
+		FC25C03B205AD90C00A26CFB /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				FC25C027205AD6BC00A26CFB /* GameScene.sks */,
 				FC25C029205AD6BC00A26CFB /* Actions.sks */,
 				FC25C02B205AD6BC00A26CFB /* GameScene.swift */,
+				FC25C03B205AD90C00A26CFB /* StartScene.swift */,
 				FC25C02D205AD6BC00A26CFB /* ViewController.swift */,
 				FC25C02F205AD6BC00A26CFB /* Assets.xcassets */,
 				FC25C031205AD6BD00A26CFB /* Main.storyboard */,
@@ -148,6 +151,7 @@
 				FC25C02E205AD6BC00A26CFB /* ViewController.swift in Sources */,
 				FC25C02C205AD6BC00A26CFB /* GameScene.swift in Sources */,
 				FC25C026205AD6BC00A26CFB /* AppDelegate.swift in Sources */,
+				FC25C03C205AD90C00A26CFB /* StartScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
