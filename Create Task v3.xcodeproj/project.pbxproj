@@ -1,0 +1,330 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FC25C026205AD6BC00A26CFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25C025205AD6BC00A26CFB /* AppDelegate.swift */; };
+		FC25C028205AD6BC00A26CFB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FC25C027205AD6BC00A26CFB /* GameScene.sks */; };
+		FC25C02A205AD6BC00A26CFB /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = FC25C029205AD6BC00A26CFB /* Actions.sks */; };
+		FC25C02C205AD6BC00A26CFB /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25C02B205AD6BC00A26CFB /* GameScene.swift */; };
+		FC25C02E205AD6BC00A26CFB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25C02D205AD6BC00A26CFB /* ViewController.swift */; };
+		FC25C030205AD6BC00A26CFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC25C02F205AD6BC00A26CFB /* Assets.xcassets */; };
+		FC25C033205AD6BD00A26CFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC25C031205AD6BD00A26CFB /* Main.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FC25C022205AD6BC00A26CFB /* Create Task v3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Create Task v3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC25C025205AD6BC00A26CFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FC25C027205AD6BC00A26CFB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		FC25C029205AD6BC00A26CFB /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		FC25C02B205AD6BC00A26CFB /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		FC25C02D205AD6BC00A26CFB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FC25C02F205AD6BC00A26CFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FC25C032205AD6BD00A26CFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FC25C034205AD6BD00A26CFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC25C035205AD6BD00A26CFB /* Create_Task_v3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Create_Task_v3.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FC25C01F205AD6BC00A26CFB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FC25C019205AD6BC00A26CFB = {
+			isa = PBXGroup;
+			children = (
+				FC25C024205AD6BC00A26CFB /* Create Task v3 */,
+				FC25C023205AD6BC00A26CFB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FC25C023205AD6BC00A26CFB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC25C022205AD6BC00A26CFB /* Create Task v3.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC25C024205AD6BC00A26CFB /* Create Task v3 */ = {
+			isa = PBXGroup;
+			children = (
+				FC25C025205AD6BC00A26CFB /* AppDelegate.swift */,
+				FC25C027205AD6BC00A26CFB /* GameScene.sks */,
+				FC25C029205AD6BC00A26CFB /* Actions.sks */,
+				FC25C02B205AD6BC00A26CFB /* GameScene.swift */,
+				FC25C02D205AD6BC00A26CFB /* ViewController.swift */,
+				FC25C02F205AD6BC00A26CFB /* Assets.xcassets */,
+				FC25C031205AD6BD00A26CFB /* Main.storyboard */,
+				FC25C034205AD6BD00A26CFB /* Info.plist */,
+				FC25C035205AD6BD00A26CFB /* Create_Task_v3.entitlements */,
+			);
+			path = "Create Task v3";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FC25C021205AD6BC00A26CFB /* Create Task v3 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC25C038205AD6BD00A26CFB /* Build configuration list for PBXNativeTarget "Create Task v3" */;
+			buildPhases = (
+				FC25C01E205AD6BC00A26CFB /* Sources */,
+				FC25C01F205AD6BC00A26CFB /* Frameworks */,
+				FC25C020205AD6BC00A26CFB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Create Task v3";
+			productName = "Create Task v3";
+			productReference = FC25C022205AD6BC00A26CFB /* Create Task v3.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FC25C01A205AD6BC00A26CFB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Jeremy Brien";
+				TargetAttributes = {
+					FC25C021205AD6BC00A26CFB = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = FC25C01D205AD6BC00A26CFB /* Build configuration list for PBXProject "Create Task v3" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FC25C019205AD6BC00A26CFB;
+			productRefGroup = FC25C023205AD6BC00A26CFB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FC25C021205AD6BC00A26CFB /* Create Task v3 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FC25C020205AD6BC00A26CFB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC25C028205AD6BC00A26CFB /* GameScene.sks in Resources */,
+				FC25C030205AD6BC00A26CFB /* Assets.xcassets in Resources */,
+				FC25C02A205AD6BC00A26CFB /* Actions.sks in Resources */,
+				FC25C033205AD6BD00A26CFB /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FC25C01E205AD6BC00A26CFB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC25C02E205AD6BC00A26CFB /* ViewController.swift in Sources */,
+				FC25C02C205AD6BC00A26CFB /* GameScene.swift in Sources */,
+				FC25C026205AD6BC00A26CFB /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FC25C031205AD6BD00A26CFB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC25C032205AD6BD00A26CFB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FC25C036205AD6BD00A26CFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FC25C037205AD6BD00A26CFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		FC25C039205AD6BD00A26CFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Create Task v3/Create_Task_v3.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = E834LPAACY;
+				INFOPLIST_FILE = "Create Task v3/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Joltz.Create-Task-v3";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		FC25C03A205AD6BD00A26CFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Create Task v3/Create_Task_v3.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = E834LPAACY;
+				INFOPLIST_FILE = "Create Task v3/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Joltz.Create-Task-v3";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FC25C01D205AD6BC00A26CFB /* Build configuration list for PBXProject "Create Task v3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC25C036205AD6BD00A26CFB /* Debug */,
+				FC25C037205AD6BD00A26CFB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC25C038205AD6BD00A26CFB /* Build configuration list for PBXNativeTarget "Create Task v3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC25C039205AD6BD00A26CFB /* Debug */,
+				FC25C03A205AD6BD00A26CFB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FC25C01A205AD6BC00A26CFB /* Project object */;
+}
