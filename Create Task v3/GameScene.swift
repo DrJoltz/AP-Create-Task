@@ -1,92 +1,209 @@
-//
-//  GameScene.swift
-//  Create Task v3
-//
-//  Created by Jeremy Brien on 3/15/18.
-//  Copyright © 2018 Jeremy Brien. All rights reserved.
-//
 
+import Cocoa
 import SpriteKit
 import GameplayKit
+import Foundation
+
 
 class GameScene: SKScene {
+    // 1024, 768
+    struct PhysicsCategory {
+        static let Player: UInt32 = 0b1
+        static let Laser: UInt32 = 0b10
+        static let Meteor: UInt32 = 0b100
+        static let Planet: UInt32 = 0b1000
+    }
     
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
+    let player = SKSpriteNode(imageNamed: "Ship")
+    var lasers = [SKSpriteNode]()
+    var meteors = [SKSpriteNode]()
+    var minMeteorDelay: UInt32 = 1
+    var maxMeteorDelay: UInt32 = 2
+    var planets = [SKSpriteNode]()
+    let maxPlanets: CGFloat = 10
+    let scoreLabel = SKLabelNode(fontNamed: "Arial-BoldMT")
+    var score: Int = 0
     
     override func didMove(to view: SKView) {
+        self.backgroundColor = .black
+        print("AAAAA")
+        physicsWorld.gravity.dy = 0
+        physicsWorld.contactDelegate = self
         
-        // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-        if let label = self.label {
-            label.alpha = 0.0
-            label.run(SKAction.fadeIn(withDuration: 2.0))
+        addPlayer()
+        spawnMeteor(delay: 1, withLoop: true)
+        for i in stride(from: (self.size.height/2) as CGFloat, to: (maxPlanets*100 + (self.size.height/2)) , by: +100 as CGFloat) {
+            generatePlanet(y: i)
         }
         
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
+        scoreLabel.position = CGPoint(x: -400, y: 330)
+        scoreLabel.fontSize = 50
+        scoreLabel.fontColor = .white
+        scoreLabel.text = String(score)
+        addChild(scoreLabel)
         
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 2.5
-            
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
+    }
+    
+    func addPlayer() {
+        player.size = CGSize(width: 60, height: 60)
+        player.name = "Player"
+        let playerBody = SKPhysicsBody(texture: player.texture!, size: CGSize(width: player.size.width, height:player.size.height))
+        playerBody.categoryBitMask = PhysicsCategory.Player
+        playerBody.contactTestBitMask = PhysicsCategory.Meteor | PhysicsCategory.Planet
+        playerBody.collisionBitMask = 0
+        playerBody.friction = 0
+        playerBody.linearDamping = 0
+        playerBody.angularDamping = 0
+        playerBody.affectedByGravity = false
+        player.physicsBody = playerBody
+        player.position = CGPoint(x: 0, y: -300)
+        addChild(player)
+    }
+    
+    func shootLaser() {
+        let laser = SKSpriteNode(imageNamed: "Laser")
+        laser.size = CGSize(width: 25, height: 25)
+        laser.name = "Laser"
+        let laserBody = SKPhysicsBody(texture: laser.texture!, size: CGSize(width: laser.size.width, height:laser.size.height))
+        laserBody.categoryBitMask = PhysicsCategory.Laser
+        laserBody.contactTestBitMask = PhysicsCategory.Meteor
+        laserBody.collisionBitMask = 0
+        laserBody.friction = 0
+        laserBody.linearDamping = 0
+        laserBody.angularDamping = 0
+        laserBody.affectedByGravity = false
+        laser.physicsBody = laserBody
+        laser.position = player.position
+        addChild(laser)
+        laserBody.velocity.dy = 1000
+        lasers.append(laser)
+        
+    }
+    
+    func spawnMeteor(delay: Double, withLoop: Bool) {
+        let meteor = SKSpriteNode(imageNamed: "Meteor")
+        meteor.size = CGSize(width: 100, height: 100)
+        meteor.name = "Meteor"
+        let meteorBody = SKPhysicsBody(circleOfRadius: 30)
+        meteorBody.categoryBitMask = PhysicsCategory.Meteor
+        meteorBody.contactTestBitMask = 0
+        meteorBody.collisionBitMask = 0
+        meteorBody.friction = 0
+        meteorBody.linearDamping = 0
+        meteorBody.angularDamping = 0
+        meteorBody.affectedByGravity = false
+        meteor.physicsBody = meteorBody
+        meteor.zPosition = 2
+        addChild(meteor)
+        meteors.append(meteor)
+        
+        if arc4random_uniform(2) == 0 {
+            meteor.position = CGPoint(x: CGFloat(arc4random_uniform(947)) - 512 , y: self.size.height/2)
+            meteorBody.velocity.dx = 98.05806757
+            meteorBody.velocity.dy = -490.2903378
+        }
+        else {
+            meteor.position = CGPoint(x: CGFloat(arc4random_uniform(947)) - 435 , y: self.size.height/2)
+            meteorBody.velocity.dx = -98.05806757
+            meteorBody.velocity.dy = -490.2903378
+        }
+        if withLoop {
+            run(SKAction.sequence([SKAction.wait(forDuration: delay), SKAction.run{self.spawnMeteor(delay: Double(arc4random_uniform(self.maxMeteorDelay - self.minMeteorDelay) + self.minMeteorDelay), withLoop: true)}]))
         }
     }
     
+    func generatePlanet(y: CGFloat) {
+        let planet = SKSpriteNode(imageNamed: "Planet" + String(arc4random_uniform(9) + 1))
+        planet.size = CGSize(width: 125, height: 125)
+        planet.name = "Planet"
+        let planetBody = SKPhysicsBody(texture: planet.texture!, size: CGSize(width: planet.size.width, height: planet.size.height))
+        planetBody.categoryBitMask = PhysicsCategory.Planet
+        planetBody.contactTestBitMask = 0
+        planetBody.collisionBitMask = 0
+        planetBody.friction = 0
+        planetBody.linearDamping = 0
+        planetBody.angularDamping = 0
+        planetBody.affectedByGravity = false
+        planet.physicsBody = planetBody
+        planet.position = CGPoint(x: CGFloat(arc4random_uniform(1024)) - 512, y: y)
+        planetBody.velocity.dy = -250
+        addChild(planet)
+        planets.append(planet)
+    }
     
-    func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
+    func meteorShower(numberOfMeteors: Int) {
+        for _ in 1...numberOfMeteors {
+            spawnMeteor(delay: 0, withLoop: false)
         }
     }
     
-    func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
-    }
-    
-    override func mouseDown(with event: NSEvent) {
-        self.touchDown(atPoint: event.location(in: self))
-    }
-    
-    override func mouseDragged(with event: NSEvent) {
-        self.touchMoved(toPoint: event.location(in: self))
-    }
-    
-    override func mouseUp(with event: NSEvent) {
-        self.touchUp(atPoint: event.location(in: self))
+    func removeEntity(entity: SKSpriteNode, list: inout [SKSpriteNode]) {
+        list.remove(at: list.index(of: entity)!)
+        entity.removeFromParent()
     }
     
     override func keyDown(with event: NSEvent) {
         switch event.keyCode {
-        case 0x31:
-            if let label = self.label {
-                label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
+        case 123: // Left
+            if player.position.x > -470 {
+                player.position.x += -60
             }
+        case 124: // Right
+            if player.position.x < 470 {
+                player.position.x += 60
+            }
+        case 0x31: // Space
+            shootLaser()
         default:
-            print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
+            break
         }
     }
     
-    
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+        for laser in lasers {
+            if laser.position.y > (self.size.height / 2) {
+                removeEntity(entity: laser, list: &lasers)
+            }
+        }
+        
+        for meteor in meteors {
+            if meteor.position.y < (self.size.height / -2) {
+                removeEntity(entity: meteor, list: &meteors)
+                if arc4random_uniform(100) == 0 {
+                    meteorShower(numberOfMeteors: Int(arc4random_uniform(9) + 1))
+                }
+            }
+        }
+        
+        for planet in planets {
+            if planet.position.y < (self.size.height / -2) {
+                removeEntity(entity: planet, list: &planets)
+                generatePlanet(y: planets.last!.position.y + 100)
+            }
+        }
+        
+        scoreLabel.text = String(score)
     }
 }
+
+extension GameScene: SKPhysicsContactDelegate {
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        if let nodeA = contact.bodyA.node as? SKSpriteNode, let nodeB = contact.bodyB.node as? SKSpriteNode {
+            if nodeA.name! == "Laser" && nodeB.name! == "Meteor" {
+                removeEntity(entity: nodeA, list: &lasers)
+                removeEntity(entity: nodeB, list: &meteors)
+                score += 1
+                print("Contact: Laser, Meteor")
+            }
+            else if nodeA.name! == "Player" && nodeB.name! == "Meteor" {
+                print("Contact: Player, Meteor")
+            }
+            else if nodeA.name! == "Player" && nodeB.name! == "Planet" {
+                print("Contact: Player, Planet")
+            }
+        }
+    }
+}
+
+
