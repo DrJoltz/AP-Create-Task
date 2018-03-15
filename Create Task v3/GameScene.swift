@@ -197,7 +197,6 @@ extension GameScene: SKPhysicsContactDelegate {
             }
             else if nodeA.name! == "Player" && nodeB.name! == "Meteor" {
                 print("Contact: Player, Meteor")
-                self.view!.presentScene(SKScene(fileNamed: "StartScene"))
             }
             else if nodeA.name! == "Player" && nodeB.name! == "Planet" {
                 print("Contact: Player, Planet")
