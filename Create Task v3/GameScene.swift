@@ -197,9 +197,17 @@ extension GameScene: SKPhysicsContactDelegate {
             }
             else if nodeA.name! == "Player" && nodeB.name! == "Meteor" {
                 print("Contact: Player, Meteor")
+                if let scene = StartScene(fileNamed: "StartScene") {
+                    scene.scaleMode = .aspectFill
+                    self.view?.presentScene(scene)
+                }
             }
             else if nodeA.name! == "Player" && nodeB.name! == "Planet" {
                 print("Contact: Player, Planet")
+                if let scene = StartScene(fileNamed: "StartScene") {
+                    scene.scaleMode = .aspectFill
+                    self.view?.presentScene(scene)
+                }
             }
         }
     }
