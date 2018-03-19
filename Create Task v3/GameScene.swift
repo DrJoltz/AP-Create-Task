@@ -22,7 +22,7 @@ class GameScene: SKScene {
     var planets = [SKSpriteNode]()
     let maxPlanets: CGFloat = 10
     let scoreLabel = SKLabelNode(fontNamed: "Arial-BoldMT")
-    var score: Int = 0
+    static var score: Int = 0
     
     override func didMove(to view: SKView) {
         self.backgroundColor = .black
@@ -38,7 +38,7 @@ class GameScene: SKScene {
         scoreLabel.position = CGPoint(x: -400, y: 330)
         scoreLabel.fontSize = 50
         scoreLabel.fontColor = .white
-        scoreLabel.text = String(score)
+        scoreLabel.text = String(GameScene.score)
         addChild(scoreLabel)
         
     }
@@ -181,7 +181,7 @@ class GameScene: SKScene {
             }
         }
         
-        scoreLabel.text = String(score)
+        scoreLabel.text = String(GameScene.score)
     }
 }
 
@@ -192,7 +192,7 @@ extension GameScene: SKPhysicsContactDelegate {
             if nodeA.name! == "Laser" && nodeB.name! == "Meteor" {
                 removeEntity(entity: nodeA, list: &lasers)
                 removeEntity(entity: nodeB, list: &meteors)
-                score += 1
+                GameScene.score += 1
                 print("Contact: Laser, Meteor")
             }
             else if nodeA.name! == "Player" && nodeB.name! == "Meteor" {

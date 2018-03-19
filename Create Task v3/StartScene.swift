@@ -7,13 +7,30 @@ import Foundation
 
 class StartScene: SKScene {
     let startButton = SKLabelNode(text: "Press Space Bar to start!")
+    let scoreButton = SKLabelNode(text: "Previous Score: 0")
+    let accuracyButton = SKLabelNode(text: "Previous Accuracy: 0%")
     
     override func didMove(to view: SKView) {
         startButton.fontSize = 50
         startButton.fontColor = .red
         startButton.fontName = "Arial-BoldMT"
-        startButton.position = CGPoint(x: 0, y: 0)
+        startButton.position = CGPoint(x: 0, y: -100)
+        
+        scoreButton.fontSize = 30
+        scoreButton.fontColor = .black
+        scoreButton.fontName = "Arial-BoldMT"
+        scoreButton.position = CGPoint(x: 0, y: 200)
+        scoreButton.text = "Previous Score: " + String(GameScene.score)
+        GameScene.score = 0
+        
+        accuracyButton.fontSize = 30
+        accuracyButton.fontColor = .black
+        accuracyButton.fontName = "Arial-BoldMT"
+        accuracyButton.position = CGPoint(x: 0, y: 100)
+        
         addChild(startButton)
+        addChild(scoreButton)
+        addChild(accuracyButton)
     }
     
     override func keyDown(with event: NSEvent) {
