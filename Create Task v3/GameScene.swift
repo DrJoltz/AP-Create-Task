@@ -17,12 +17,11 @@ class GameScene: SKScene {
     let player = SKSpriteNode(imageNamed: "Ship")
     var lasers = [SKSpriteNode]()
     var meteors = [SKSpriteNode]()
-    var minMeteorDelay: UInt32 = 1
-    var maxMeteorDelay: UInt32 = 2
     var planets = [SKSpriteNode]()
-    let maxPlanets: CGFloat = 10
     let scoreLabel = SKLabelNode(fontNamed: "Arial-BoldMT")
     static var score: Int = 0
+    static var shotsFired: Int = 0
+    var scoreFactor: CGFloat = 0
     
     override func didMove(to view: SKView) {
         self.backgroundColor = .black
@@ -31,7 +30,7 @@ class GameScene: SKScene {
         
         addPlayer()
         spawnMeteor(delay: 1, withLoop: true)
-        for i in stride(from: (self.size.height/2) as CGFloat, to: (maxPlanets*100 + (self.size.height/2)) , by: +100 as CGFloat) {
+        for i in stride(from: (self.size.height/2) as CGFloat, to: (10*100 + (self.size.height/2)) , by: +100 as CGFloat) {
             generatePlanet(y: i)
         }
         
@@ -76,6 +75,7 @@ class GameScene: SKScene {
         addChild(laser)
         laserBody.velocity.dy = 1000
         lasers.append(laser)
+        GameScene.shotsFired += 1
         
     }
     
@@ -107,7 +107,7 @@ class GameScene: SKScene {
             meteorBody.velocity.dy = -490.2903378
         }
         if withLoop {
-            run(SKAction.sequence([SKAction.wait(forDuration: delay), SKAction.run{self.spawnMeteor(delay: Double(arc4random_uniform(self.maxMeteorDelay - self.minMeteorDelay) + self.minMeteorDelay), withLoop: true)}]))
+            run(SKAction.sequence([SKAction.wait(forDuration: delay), SKAction.run{self.spawnMeteor(delay: 1, withLoop: true)}]))
         }
     }
     
@@ -157,7 +157,6 @@ class GameScene: SKScene {
             break
         }
     }
-    
     override func update(_ currentTime: TimeInterval) {
         for laser in lasers {
             if laser.position.y > (self.size.height / 2) {
@@ -168,9 +167,6 @@ class GameScene: SKScene {
         for meteor in meteors {
             if meteor.position.y < (self.size.height / -2) {
                 removeEntity(entity: meteor, list: &meteors)
-                if arc4random_uniform(100) == 0 {
-                    meteorShower(numberOfMeteors: Int(arc4random_uniform(9) + 1))
-                }
             }
         }
         
@@ -178,10 +174,17 @@ class GameScene: SKScene {
             if planet.position.y < (self.size.height / -2) {
                 removeEntity(entity: planet, list: &planets)
                 generatePlanet(y: planets.last!.position.y + 100)
+                if arc4random_uniform(50) == 0 {
+                    meteorShower(numberOfMeteors: Int(arc4random_uniform(9) + 1))
+                }
+            }
+            else {
+                planet.physicsBody!.velocity.dy = -250 - (scoreFactor * 250)
             }
         }
         
         scoreLabel.text = String(GameScene.score)
+        scoreFactor = CGFloat(CGFloat(GameScene.score) / 50)
     }
 }
 

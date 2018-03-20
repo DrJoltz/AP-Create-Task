@@ -21,13 +21,20 @@ class StartScene: SKScene {
         scoreButton.fontName = "Arial-BoldMT"
         scoreButton.position = CGPoint(x: 0, y: 200)
         scoreButton.text = "Previous Score: " + String(GameScene.score)
-        GameScene.score = 0
         
         accuracyButton.fontSize = 30
         accuracyButton.fontColor = .black
         accuracyButton.fontName = "Arial-BoldMT"
         accuracyButton.position = CGPoint(x: 0, y: 100)
+        if GameScene.shotsFired != 0 {
+            accuracyButton.text = "Previous Accuracy: " + String((Float(GameScene.score) / Float(GameScene.shotsFired)) * 100) + "%"
+        }
+        else {
+            accuracyButton.text = "Previous Accuracy: 0%"
+        }
         
+        GameScene.shotsFired = 0
+        GameScene.score = 0
         addChild(startButton)
         addChild(scoreButton)
         addChild(accuracyButton)
