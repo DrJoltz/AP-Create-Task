@@ -22,6 +22,8 @@ class GameScene: SKScene {
     static var score: Int = 0
     static var shotsFired: Int = 0
     var scoreFactor: CGFloat = 0
+    let planetDistance: CGFloat = 150
+
     
     override func didMove(to view: SKView) {
         self.backgroundColor = .black
@@ -30,7 +32,7 @@ class GameScene: SKScene {
         
         addPlayer()
         spawnMeteor(delay: 1, withLoop: true)
-        for i in stride(from: (self.size.height/2) as CGFloat, to: (10*100 + (self.size.height/2)) , by: +100 as CGFloat) {
+        for i in stride(from: (self.size.height/2) as CGFloat, to: (10*planetDistance + (self.size.height/2)) , by: +100 as CGFloat) {
             generatePlanet(y: i)
         }
         
@@ -173,7 +175,7 @@ class GameScene: SKScene {
         for planet in planets {
             if planet.position.y < (self.size.height / -2) {
                 removeEntity(entity: planet, list: &planets)
-                generatePlanet(y: planets.last!.position.y + 100)
+                generatePlanet(y: planets.last!.position.y + planetDistance)
                 if arc4random_uniform(50) == 0 {
                     meteorShower(numberOfMeteors: Int(arc4random_uniform(9) + 1))
                 }
@@ -184,7 +186,7 @@ class GameScene: SKScene {
         }
         
         scoreLabel.text = String(GameScene.score)
-        scoreFactor = CGFloat(CGFloat(GameScene.score) / 50)
+        scoreFactor = CGFloat(CGFloat(GameScene.score) / 25)
     }
 }
 
@@ -196,17 +198,14 @@ extension GameScene: SKPhysicsContactDelegate {
                 removeEntity(entity: nodeA, list: &lasers)
                 removeEntity(entity: nodeB, list: &meteors)
                 GameScene.score += 1
-                print("Contact: Laser, Meteor")
             }
             else if nodeA.name! == "Player" && nodeB.name! == "Meteor" {
-                print("Contact: Player, Meteor")
                 if let scene = StartScene(fileNamed: "StartScene") {
                     scene.scaleMode = .aspectFill
                     self.view?.presentScene(scene)
                 }
             }
             else if nodeA.name! == "Player" && nodeB.name! == "Planet" {
-                print("Contact: Player, Planet")
                 if let scene = StartScene(fileNamed: "StartScene") {
                     scene.scaleMode = .aspectFill
                     self.view?.presentScene(scene)
