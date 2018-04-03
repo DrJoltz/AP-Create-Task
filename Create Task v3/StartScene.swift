@@ -6,7 +6,7 @@ import Foundation
 
 
 class StartScene: SKScene {
-    let startButton = SKLabelNode(text: "Press Space Bar to start!")
+    let startButton = SKLabelNode(text: "Press Enter to start!")
     let scoreButton = SKLabelNode(text: "Previous Score: 0")
     let accuracyButton = SKLabelNode(text: "Previous Accuracy: 0%")
     
@@ -42,7 +42,7 @@ class StartScene: SKScene {
     
     override func keyDown(with event: NSEvent) {
         switch event.keyCode {
-        case 0x31: // Space
+        case 0x24: // Enter
             if let scene = GameScene(fileNamed: "GameScene") {
                 scene.scaleMode = .aspectFill
                 self.view?.presentScene(scene)

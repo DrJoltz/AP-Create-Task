@@ -109,7 +109,8 @@ class GameScene: SKScene {
             meteorBody.velocity.dy = -490.2903378
         }
         if withLoop {
-            run(SKAction.sequence([SKAction.wait(forDuration: delay), SKAction.run{self.spawnMeteor(delay: 1, withLoop: true)}]))
+            let random_delay = arc4random_uniform(2) + 1
+            run(SKAction.sequence([SKAction.wait(forDuration: delay), SKAction.run{self.spawnMeteor(delay: Double(random_delay), withLoop: true)}]))
         }
     }
     
