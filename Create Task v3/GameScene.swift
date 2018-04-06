@@ -1,12 +1,9 @@
 
-import Cocoa
 import SpriteKit
-import GameplayKit
 import Foundation
 
 
 class GameScene: SKScene {
-    // 1024, 768
     struct PhysicsCategory {
         static let Player: UInt32 = 0b1
         static let Laser: UInt32 = 0b10
@@ -44,17 +41,28 @@ class GameScene: SKScene {
         
     }
     
+    func setBaseProperties(body: SKPhysicsBody, category: UInt32, contactTests: [UInt32]) {
+        body.collisionBitMask = 0
+        body.friction = 0
+        body.linearDamping = 0
+        body.angularDamping = 0
+        body.affectedByGravity = false
+        body.categoryBitMask = category
+        if contactTests.count > 1 {
+            for contact in contactTests {
+                body.contactTestBitMask += contact
+            }
+        }
+        else {
+            body.contactTestBitMask = 0
+        }
+    }
+    
     func addPlayer() {
         player.size = CGSize(width: 60, height: 60)
         player.name = "Player"
         let playerBody = SKPhysicsBody(texture: player.texture!, size: CGSize(width: player.size.width, height:player.size.height))
-        playerBody.categoryBitMask = PhysicsCategory.Player
-        playerBody.contactTestBitMask = PhysicsCategory.Meteor | PhysicsCategory.Planet
-        playerBody.collisionBitMask = 0
-        playerBody.friction = 0
-        playerBody.linearDamping = 0
-        playerBody.angularDamping = 0
-        playerBody.affectedByGravity = false
+        setBaseProperties(body: playerBody, category: PhysicsCategory.Player, contactTests: [PhysicsCategory.Meteor, PhysicsCategory.Planet])
         player.physicsBody = playerBody
         player.position = CGPoint(x: 0, y: -300)
         addChild(player)
@@ -65,13 +73,7 @@ class GameScene: SKScene {
         laser.size = CGSize(width: 25, height: 25)
         laser.name = "Laser"
         let laserBody = SKPhysicsBody(texture: laser.texture!, size: CGSize(width: laser.size.width, height:laser.size.height))
-        laserBody.categoryBitMask = PhysicsCategory.Laser
-        laserBody.contactTestBitMask = PhysicsCategory.Meteor
-        laserBody.collisionBitMask = 0
-        laserBody.friction = 0
-        laserBody.linearDamping = 0
-        laserBody.angularDamping = 0
-        laserBody.affectedByGravity = false
+        setBaseProperties(body: laserBody, category: PhysicsCategory.Laser, contactTests: [PhysicsCategory.Meteor])
         laser.physicsBody = laserBody
         laser.position = player.position
         addChild(laser)
@@ -86,13 +88,7 @@ class GameScene: SKScene {
         meteor.size = CGSize(width: 100, height: 100)
         meteor.name = "Meteor"
         let meteorBody = SKPhysicsBody(circleOfRadius: 30)
-        meteorBody.categoryBitMask = PhysicsCategory.Meteor
-        meteorBody.contactTestBitMask = 0
-        meteorBody.collisionBitMask = 0
-        meteorBody.friction = 0
-        meteorBody.linearDamping = 0
-        meteorBody.angularDamping = 0
-        meteorBody.affectedByGravity = false
+        setBaseProperties(body: meteorBody, category: PhysicsCategory.Meteor, contactTests: [])
         meteor.physicsBody = meteorBody
         meteor.zPosition = 2
         addChild(meteor)
@@ -119,13 +115,7 @@ class GameScene: SKScene {
         planet.size = CGSize(width: 125, height: 125)
         planet.name = "Planet"
         let planetBody = SKPhysicsBody(texture: planet.texture!, size: CGSize(width: planet.size.width, height: planet.size.height))
-        planetBody.categoryBitMask = PhysicsCategory.Planet
-        planetBody.contactTestBitMask = 0
-        planetBody.collisionBitMask = 0
-        planetBody.friction = 0
-        planetBody.linearDamping = 0
-        planetBody.angularDamping = 0
-        planetBody.affectedByGravity = false
+        setBaseProperties(body: planetBody, category: PhysicsCategory.Planet, contactTests: [])
         planet.physicsBody = planetBody
         planet.position = CGPoint(x: CGFloat(arc4random_uniform(1024)) - 512, y: y)
         planetBody.velocity.dy = -250

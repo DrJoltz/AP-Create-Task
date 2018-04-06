@@ -1,29 +1,16 @@
-//
-//  ViewController.swift
-//  Create Task v3
-//
-//  Created by Jeremy Brien on 3/15/18.
-//  Copyright © 2018 Jeremy Brien. All rights reserved.
-//
 
-import Cocoa
 import SpriteKit
-import GameplayKit
 
 class ViewController: NSViewController {
 
-    @IBOutlet var skView: SKView!
+    @IBOutlet var skView: SKView! // Included by Apple
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if let view = self.skView {
-            // Load the SKScene from 'GameScene.sks'
             if let scene = StartScene(fileNamed: "StartScene") {
-                // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
-                
-                // Present the scene
                 view.presentScene(scene)
             }
             
