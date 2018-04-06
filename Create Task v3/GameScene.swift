@@ -20,13 +20,10 @@ class GameScene: SKScene {
     static var shotsFired: Int = 0
     var scoreFactor: CGFloat = 0
     let planetDistance: CGFloat = 150
-
     
     override func didMove(to view: SKView) {
         self.backgroundColor = .black
-        physicsWorld.gravity.dy = 0
         physicsWorld.contactDelegate = self
-        
         addPlayer()
         spawnMeteor(delay: 1, withLoop: true)
         for i in stride(from: (self.size.height/2) as CGFloat, to: (10*planetDistance + (self.size.height/2)) , by: +100 as CGFloat) {
@@ -38,17 +35,17 @@ class GameScene: SKScene {
         scoreLabel.fontColor = .white
         scoreLabel.text = String(GameScene.score)
         addChild(scoreLabel)
-        
     }
     
-    func setBaseProperties(body: SKPhysicsBody, category: UInt32, contactTests: [UInt32]) {
+    func setBaseProperties(body: SKPhysicsBody, category: UInt32, contactTests: [UInt32], preciseDetection: Bool) {
         body.collisionBitMask = 0
         body.friction = 0
         body.linearDamping = 0
         body.angularDamping = 0
         body.affectedByGravity = false
         body.categoryBitMask = category
-        if contactTests.count > 1 {
+        body.usesPreciseCollisionDetection = preciseDetection
+        if contactTests.count > 0 {
             for contact in contactTests {
                 body.contactTestBitMask += contact
             }
@@ -62,7 +59,7 @@ class GameScene: SKScene {
         player.size = CGSize(width: 60, height: 60)
         player.name = "Player"
         let playerBody = SKPhysicsBody(texture: player.texture!, size: CGSize(width: player.size.width, height:player.size.height))
-        setBaseProperties(body: playerBody, category: PhysicsCategory.Player, contactTests: [PhysicsCategory.Meteor, PhysicsCategory.Planet])
+        setBaseProperties(body: playerBody, category: PhysicsCategory.Player, contactTests: [PhysicsCategory.Meteor, PhysicsCategory.Planet], preciseDetection: true)
         player.physicsBody = playerBody
         player.position = CGPoint(x: 0, y: -300)
         addChild(player)
@@ -73,14 +70,13 @@ class GameScene: SKScene {
         laser.size = CGSize(width: 25, height: 25)
         laser.name = "Laser"
         let laserBody = SKPhysicsBody(texture: laser.texture!, size: CGSize(width: laser.size.width, height:laser.size.height))
-        setBaseProperties(body: laserBody, category: PhysicsCategory.Laser, contactTests: [PhysicsCategory.Meteor])
+        setBaseProperties(body: laserBody, category: PhysicsCategory.Laser, contactTests: [PhysicsCategory.Meteor], preciseDetection: true)
         laser.physicsBody = laserBody
         laser.position = player.position
         addChild(laser)
         laserBody.velocity.dy = 1000
         lasers.append(laser)
         GameScene.shotsFired += 1
-        
     }
     
     func spawnMeteor(delay: Double, withLoop: Bool) {
@@ -88,7 +84,7 @@ class GameScene: SKScene {
         meteor.size = CGSize(width: 100, height: 100)
         meteor.name = "Meteor"
         let meteorBody = SKPhysicsBody(circleOfRadius: 30)
-        setBaseProperties(body: meteorBody, category: PhysicsCategory.Meteor, contactTests: [])
+        setBaseProperties(body: meteorBody, category: PhysicsCategory.Meteor, contactTests: [], preciseDetection: false)
         meteor.physicsBody = meteorBody
         meteor.zPosition = 2
         addChild(meteor)
@@ -104,6 +100,7 @@ class GameScene: SKScene {
             meteorBody.velocity.dx = -98.05806757
             meteorBody.velocity.dy = -490.2903378
         }
+        
         if withLoop {
             let random_delay = arc4random_uniform(2) + 1
             run(SKAction.sequence([SKAction.wait(forDuration: delay), SKAction.run{self.spawnMeteor(delay: Double(random_delay), withLoop: true)}]))
@@ -115,7 +112,7 @@ class GameScene: SKScene {
         planet.size = CGSize(width: 125, height: 125)
         planet.name = "Planet"
         let planetBody = SKPhysicsBody(texture: planet.texture!, size: CGSize(width: planet.size.width, height: planet.size.height))
-        setBaseProperties(body: planetBody, category: PhysicsCategory.Planet, contactTests: [])
+        setBaseProperties(body: planetBody, category: PhysicsCategory.Planet, contactTests: [], preciseDetection: false)
         planet.physicsBody = planetBody
         planet.position = CGPoint(x: CGFloat(arc4random_uniform(1024)) - 512, y: y)
         planetBody.velocity.dy = -250
@@ -150,6 +147,7 @@ class GameScene: SKScene {
             break
         }
     }
+    
     override func update(_ currentTime: TimeInterval) {
         for laser in lasers {
             if laser.position.y > (self.size.height / 2) {
