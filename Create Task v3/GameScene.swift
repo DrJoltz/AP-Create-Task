@@ -47,7 +47,7 @@ class GameScene: SKScene {
         body.usesPreciseCollisionDetection = preciseDetection
         if contactTests.count > 0 {
             for contact in contactTests {
-                body.contactTestBitMask += contact
+                body.contactTestBitMask |= contact
             }
         }
         else {
