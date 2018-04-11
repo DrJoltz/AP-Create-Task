@@ -11,7 +11,8 @@ class GameScene: SKScene {
         static let Planet: UInt32 = 0b1000
     }
     
-    let player = SKSpriteNode(imageNamed: "Ship") // http://retropedia.wikia.com/wiki/Spaceship_(Galaga)
+    let player = SKSpriteNode(imageNamed: "Ship")
+    // http://retropedia.wikia.com/wiki/Spaceship_(Galaga)
     var lasers = [SKSpriteNode]()
     var meteors = [SKSpriteNode]()
     var planets = [SKSpriteNode]()
@@ -66,7 +67,8 @@ class GameScene: SKScene {
     }
     
     func shootLaser() {
-        let laser = SKSpriteNode(imageNamed: "Laser") // http://www.laughinggif.com/view/fy21mmomlp/9.html
+        let laser = SKSpriteNode(imageNamed: "Laser")
+        // http://www.laughinggif.com/view/fy21mmomlp/9.html
         laser.size = CGSize(width: 25, height: 25)
         laser.name = "Laser"
         let laserBody = SKPhysicsBody(texture: laser.texture!, size: CGSize(width: laser.size.width, height:laser.size.height))
@@ -80,7 +82,8 @@ class GameScene: SKScene {
     }
     
     func spawnMeteor(delay: Double, withLoop: Bool) {
-        let meteor = SKSpriteNode(imageNamed: "Meteor") // http://www.iconarchive.com/show/bumpy-planets-icons-by-zairaam/asteroid-icon.html
+        let meteor = SKSpriteNode(imageNamed: "Meteor")
+        // http://www.iconarchive.com/show/bumpy-planets-icons-by-zairaam/asteroid-icon.html
         meteor.size = CGSize(width: 100, height: 100)
         meteor.name = "Meteor"
         let meteorBody = SKPhysicsBody(circleOfRadius: 30)
@@ -92,13 +95,13 @@ class GameScene: SKScene {
         
         if arc4random_uniform(2) == 0 {
             meteor.position = CGPoint(x: CGFloat(arc4random_uniform(947)) - 512 , y: self.size.height/2)
-            meteorBody.velocity.dx = 98.05806757
-            meteorBody.velocity.dy = -490.2903378
+            meteorBody.velocity.dx = 98.05806757 // 500 / sqrt(26)
+            meteorBody.velocity.dy = -490.2903378 // -2500 / sqrt(26)
         }
         else {
             meteor.position = CGPoint(x: CGFloat(arc4random_uniform(947)) - 435 , y: self.size.height/2)
-            meteorBody.velocity.dx = -98.05806757
-            meteorBody.velocity.dy = -490.2903378
+            meteorBody.velocity.dx = -98.05806757 // -500 / sqrt(26)
+            meteorBody.velocity.dy = -490.2903378 // -2500 / sqrt(26)
         }
         
         if withLoop {
@@ -127,8 +130,16 @@ class GameScene: SKScene {
         }
     }
     
-    func removeEntity(entity: SKSpriteNode, list: inout [SKSpriteNode]) {
-        list.remove(at: list.index(of: entity)!)
+    func removeEntity(entity: SKSpriteNode) {
+        if entity.name == "Meteor" {
+            meteors.remove(at: meteors.index(of: entity)!)
+        }
+        else if entity.name == "Planet" {
+            planets.remove(at: planets.index(of: entity)!)
+        }
+        else if entity.name == "Laser" {
+            lasers.remove(at: lasers.index(of: entity)!)
+        }
         entity.removeFromParent()
     }
     
@@ -152,19 +163,19 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         for laser in lasers {
             if laser.position.y > (self.size.height / 2) {
-                removeEntity(entity: laser, list: &lasers)
+                removeEntity(entity: laser)
             }
         }
         
         for meteor in meteors {
             if meteor.position.y < (self.size.height / -2) {
-                removeEntity(entity: meteor, list: &meteors)
+                removeEntity(entity: meteor)
             }
         }
         
         for planet in planets {
             if planet.position.y < (self.size.height / -2) {
-                removeEntity(entity: planet, list: &planets)
+                removeEntity(entity: planet)
                 generatePlanet(y: planets.last!.position.y + planetDistance)
                 if arc4random_uniform(50) == 0 {
                     meteorShower(numberOfMeteors: Int(arc4random_uniform(9) + 1))
@@ -185,8 +196,8 @@ extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         if let nodeA = contact.bodyA.node as? SKSpriteNode, let nodeB = contact.bodyB.node as? SKSpriteNode {
             if nodeA.name! == "Laser" && nodeB.name! == "Meteor" {
-                removeEntity(entity: nodeA, list: &lasers)
-                removeEntity(entity: nodeB, list: &meteors)
+                removeEntity(entity: nodeA)
+                removeEntity(entity: nodeB)
                 GameScene.score += 1
             }
             else if nodeA.name! == "Player" && nodeB.name! == "Meteor" {
