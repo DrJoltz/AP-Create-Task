@@ -2,7 +2,7 @@
 import SpriteKit
 import Foundation
 
-
+// All images that I used are cited in APA style after I create a sprite with the respective image
 class GameScene: SKScene {
     struct PhysicsCategory {
         static let Player: UInt32 = 0b1
@@ -12,7 +12,7 @@ class GameScene: SKScene {
     }
     
     let player = SKSpriteNode(imageNamed: "Ship")
-    // http://retropedia.wikia.com/wiki/Spaceship_(Galaga)
+    // Spaceship Galaga. (n.d.). Retrieved from http://retropedia.wikia.com/wiki/Spaceship_(Galaga)
     var lasers = [SKSpriteNode]()
     var meteors = [SKSpriteNode]()
     var planets = [SKSpriteNode]()
@@ -68,7 +68,7 @@ class GameScene: SKScene {
     
     func shootLaser() {
         let laser = SKSpriteNode(imageNamed: "Laser")
-        // http://www.laughinggif.com/view/fy21mmomlp/9.html
+        // Ki ball 2. (n.d.). Retrieved from http://www.laughinggif.com/view/fy21mmomlp/9.html
         laser.size = CGSize(width: 25, height: 25)
         laser.name = "Laser"
         let laserBody = SKPhysicsBody(texture: laser.texture!, size: CGSize(width: laser.size.width, height:laser.size.height))
@@ -83,7 +83,7 @@ class GameScene: SKScene {
     
     func spawnMeteor(delay: Double, withLoop: Bool) {
         let meteor = SKSpriteNode(imageNamed: "Meteor")
-        // http://www.iconarchive.com/show/bumpy-planets-icons-by-zairaam/asteroid-icon.html
+        // Asteroid Icon. (n.d.). Retrieved From http://www.iconarchive.com/show/bumpy-planets-icons-by-zairaam/asteroid-icon.html
         meteor.size = CGSize(width: 100, height: 100)
         meteor.name = "Meteor"
         let meteorBody = SKPhysicsBody(circleOfRadius: 30)
@@ -112,7 +112,7 @@ class GameScene: SKScene {
     
     func generatePlanet(y: CGFloat) {
         let planet = SKSpriteNode(imageNamed: "Planet" + String(arc4random_uniform(9) + 1))
-        // All planets found at https://space-facts.com/transparent-planet-pictures/
+        // Transparent Planet Pictures. (n.d.). Retrieved from https://space-facts.com/transparent-planet-pictures/
         planet.size = CGSize(width: 125, height: 125)
         planet.name = "Planet"
         let planetBody = SKPhysicsBody(texture: planet.texture!, size: CGSize(width: planet.size.width, height: planet.size.height))
